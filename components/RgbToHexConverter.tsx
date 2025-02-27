@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shuffle, Copy, Check } from 'lucide-react';
 import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
 
 export default function RgbToHexConverter() {
   // RGB to Hex state
@@ -56,11 +57,11 @@ export default function RgbToHexConverter() {
   };
 
   return (
-    <div className="max-w-xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-white shadow-sm">
+    <div className="max-w-4xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-card shadow-sm">
       <h2 className="text-lg font-bold flex items-center gap-2">
         <span className="opacity-0 animate-fade-in">🎨</span>
-        <span className="opacity-0 animate-fade-in animation-delay-100">Color</span>
-        <span className="opacity-0 animate-fade-in animation-delay-200">Tools</span>
+        <span className="opacity-0 animate-fade-in animation-delay-100">RGB to</span>
+        <span className="opacity-0 animate-fade-in animation-delay-200">HEX</span>
       </h2>
       
       <Tabs defaultValue="rgb" className="w-full">
@@ -91,7 +92,7 @@ export default function RgbToHexConverter() {
             ))}
           </div>
           <div 
-            className="w-full h-32 rounded-lg flex items-center justify-center font-mono text-lg relative group animate-slide-up animation-delay-400"
+            className="w-full h-32 rounded-lg flex items-center justify-center font-mono text-lg relative group animate-slide-up animation-delay-400 bg-card"
             style={{ 
               backgroundColor: hex,
               color: (rgb.r * 0.299 + rgb.g * 0.587 + rgb.b * 0.114) > 186 ? '#000' : '#fff'

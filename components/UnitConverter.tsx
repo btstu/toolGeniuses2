@@ -122,7 +122,7 @@ export default function UnitConverter() {
   };
 
   return (
-    <div className="max-w-xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-white shadow-sm">
+    <div className="max-w-4xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-card shadow-sm">
       <h2 className="text-lg font-bold">📏 Unit Converter</h2>
       
       <Select value={unitType} onValueChange={handleUnitTypeChange}>

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CalendarIcon, Clock } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card } from "@/components/ui/card";
 
 type TimeUnit = 'standard' | 'fun';
 
@@ -69,9 +70,9 @@ export default function DateDifferenceCalculator() {
   };
 
   return (
-    <div className="max-w-xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-white shadow-sm">
+    <div className="max-w-4xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-card shadow-sm">
       <h2 className="text-lg font-bold flex items-center gap-2">
-        <span className="opacity-0 animate-fade-in">⏰</span>
+        <span className="opacity-0 animate-fade-in">📅</span>
         <span className="opacity-0 animate-fade-in animation-delay-100">Date</span>
         <span className="opacity-0 animate-fade-in animation-delay-200">Calculator</span>
       </h2>
@@ -164,7 +165,7 @@ export default function DateDifferenceCalculator() {
               <div 
                 key={unit} 
                 className={cn(
-                  "p-4 bg-white rounded-lg shadow-sm transition-all duration-300 hover:shadow-md",
+                  "p-4 bg-card rounded-lg shadow-sm transition-all duration-300 hover:shadow-md",
                   "opacity-0 animate-slide-up",
                   `animation-delay-${(index + 3) * 100}`
                 )}
@@ -187,7 +188,7 @@ export default function DateDifferenceCalculator() {
               <div 
                 key={item.key}
                 className={cn(
-                  "p-4 bg-white rounded-lg shadow-sm transition-all duration-300 hover:shadow-md",
+                  "p-4 bg-card rounded-lg shadow-sm transition-all duration-300 hover:shadow-md",
                   "opacity-0 animate-slide-up",
                   `animation-delay-${(index + 3) * 100}`
                 )}

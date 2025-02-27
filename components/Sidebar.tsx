@@ -2,9 +2,10 @@
 
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, Paintbrush, Ruler, Clock, DollarSign, QrCode, FileText, Scan } from "lucide-react";
+import { Menu, Paintbrush, Ruler, Clock, DollarSign, QrCode, FileText, Mic, Palette } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const tools = [
   {
@@ -50,10 +51,17 @@ const tools = [
     emoji: ""
   },
   {
-    name: "Face Swapper",
-    icon: <Scan className="w-5 h-5" />,
-    href: "/tools/face",
-    color: "bg-gradient-to-r from-teal-400 to-emerald-500",
+    name: "Speech to Text",
+    icon: <Mic className="w-5 h-5" />,
+    href: "/tools/speech",
+    color: "bg-gradient-to-r from-rose-400 to-red-500",
+    emoji: ""
+  },
+  {
+    name: "Image to CSS",
+    icon: <Palette className="w-5 h-5" />,
+    href: "/tools/image-css",
+    color: "bg-gradient-to-r from-fuchsia-400 to-violet-500",
     emoji: ""
   }
 ];
@@ -68,13 +76,13 @@ export function Sidebar() {
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-64 p-0">
+      <SheetContent side="left" className="w-64 p-0 bg-background border-r">
         <SheetTitle className="sr-only">Menu</SheetTitle>
         <SidebarContent />
       </SheetContent>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex h-screen w-64 flex-col fixed left-0 top-0 border-r">
+      <aside className="hidden lg:flex h-screen w-64 flex-col fixed left-0 top-0 border-r bg-background">
         <SidebarContent />
       </aside>
     </Sheet>
@@ -85,16 +93,18 @@ function SidebarContent() {
   const pathname = usePathname();
   
   return (
-    <div className="flex flex-col gap-2 p-4">
-      <h1 className="text-xl font-semibold mb-4">🛠️ ToolsGeniuses 2.0</h1>
+    <div className="flex flex-col gap-2 p-4 bg-background">
+      <h1 className="text-xl font-semibold mb-4 text-foreground">🛠️ ToolsGeniuses 2.0</h1>
       {tools.map((tool) => (
         <Link
           key={tool.href}
           href={tool.href}
-          className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors
-            ${pathname === tool.href 
-              ? 'bg-secondary' 
-              : 'hover:bg-secondary/50'}`}
+          className={cn(
+            "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
+            pathname === tool.href 
+              ? "bg-secondary text-secondary-foreground" 
+              : "hover:bg-secondary/50"
+          )}
         >
           <div className={`p-2 rounded-md ${tool.color} text-white`}>
             {tool.icon}

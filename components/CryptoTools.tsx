@@ -66,7 +66,7 @@ export default function CryptoTools() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-white shadow-sm">
+    <div className="max-w-4xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-card shadow-sm">
       <h2 className="text-lg font-bold flex items-center gap-2">
         <span className="opacity-0 animate-fade-in">💰</span>
         <span className="opacity-0 animate-fade-in animation-delay-100">Crypto</span>
@@ -124,7 +124,7 @@ export default function CryptoTools() {
 
         <TabsContent value="converter" className="space-y-4">
           <Card className="animate-fade-in">
-            <CardContent className="pt-6">
+            <CardContent className="pt-6 bg-card">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2 animate-slide-up animation-delay-100">
                   <label className="text-sm font-medium">Amount</label>
@@ -165,7 +165,7 @@ export default function CryptoTools() {
 
         <TabsContent value="rankings" className="space-y-4">
           <Card className="animate-fade-in">
-            <CardContent className="pt-6">
+            <CardContent className="pt-6 bg-card">
               <div className="space-y-4">
                 {cryptoData.slice(0, 10).map((crypto, index) => (
                   <div

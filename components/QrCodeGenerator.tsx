@@ -67,7 +67,7 @@ export default function QrCodeGenerator() {
   }, [url, color, bgColor]);
 
   return (
-    <div className="max-w-xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-white shadow-sm">
+    <div className="max-w-4xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-card shadow-sm">
       <h2 className="text-lg font-bold flex items-center gap-2">
         <span className="opacity-0 animate-fade-in">📱</span>
         <span className="opacity-0 animate-fade-in animation-delay-100">QR Code</span>
