@@ -1,14 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { addDays, format } from 'date-fns';
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { CalendarIcon, Clock } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card } from "@/components/ui/card";
 
 type TimeUnit = 'standard' | 'fun';
 
@@ -36,11 +35,7 @@ export default function DateDifferenceCalculator() {
   const [activeTab, setActiveTab] = useState<TimeUnit>('standard');
   const [difference, setDifference] = useState<Record<string, number>>({});
 
-  useEffect(() => {
-    calculateDifference();
-  }, [startDate, endDate, startTime, endTime]);
-
-  const calculateDifference = () => {
+  const calculateDifference = useCallback(() => {
     const start = new Date(startDate);
     const [startHours, startMinutes] = startTime.split(':');
     start.setHours(parseInt(startHours), parseInt(startMinutes));
@@ -63,7 +58,11 @@ export default function DateDifferenceCalculator() {
     });
 
     setDifference(results);
-  };
+  }, [startDate, endDate, startTime, endTime]);
+
+  useEffect(() => {
+    calculateDifference();
+  }, [startDate, endDate, startTime, endTime, calculateDifference]);
 
   const formatNumber = (num: number) => {
     return num.toLocaleString('en-US');

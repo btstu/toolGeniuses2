@@ -67,8 +67,6 @@ const tools = [
 ];
 
 export function Sidebar() {
-  const pathname = usePathname();
-
   return (
     <Sheet>
       <SheetTrigger asChild>

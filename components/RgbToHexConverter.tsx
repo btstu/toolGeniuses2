@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shuffle, Copy, Check } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import { Card } from "@/components/ui/card";
+
 
 export default function RgbToHexConverter() {
   // RGB to Hex state
@@ -114,7 +114,7 @@ export default function RgbToHexConverter() {
 
         <TabsContent value="gradient" className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-slide-up animation-delay-100">
-            {['start', 'end'].map((position, index) => (
+            {['start', 'end'].map((position) => (
               <div key={position} className="space-y-2">
                 <label className="text-sm font-medium capitalize">{position} Color</label>
                 <div className="flex gap-2">

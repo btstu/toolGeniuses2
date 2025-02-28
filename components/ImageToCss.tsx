@@ -5,10 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Upload, Copy, Check, Image as ImageIcon, Loader2, Link, Code } from "lucide-react";
-import { cn } from "@/lib/utils";
+
+import { Upload, Copy, Check, Loader2, Link, Code } from "lucide-react";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from 'next/image';
 
 interface GeneratedCode {
   html: string;
@@ -230,10 +231,12 @@ export default function ImageToCss() {
 
               {image && (
                 <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary/10">
-                  <img
+                  <Image
                     src={image}
-                    alt="Preview"
-                    className="object-contain w-full h-full"
+                    alt="Image preview"
+                    fill
+                    className="object-contain"
+                    unoptimized
                   />
                   <Button
                     onClick={generateCode}

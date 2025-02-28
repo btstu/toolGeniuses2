@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Upload, Download, Loader2, Copy, Check, DownloadCloud, FileText, FileJson, Film, Menu } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Upload, Loader2, Copy, Check, DownloadCloud, FileText, FileJson, Film } from "lucide-react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,

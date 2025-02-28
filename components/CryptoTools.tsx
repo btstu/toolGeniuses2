@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowUpDown, TrendingUp, DollarSign, Loader2 } from "lucide-react";
+import { TrendingUp, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type CryptoData = {

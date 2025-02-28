@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Download, Link as LinkIcon, Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import Image from 'next/image';
 
 export default function QrCodeGenerator() {
   const [url, setUrl] = useState('');
@@ -16,7 +17,7 @@ export default function QrCodeGenerator() {
   const [color, setColor] = useState('#000000');
   const [bgColor, setBgColor] = useState('#FFFFFF');
 
-  const generateQRCode = async (inputUrl: string) => {
+  const generateQRCode = useCallback(async (inputUrl: string) => {
     if (!inputUrl) {
       setQrCode('');
       return;
@@ -32,7 +33,7 @@ export default function QrCodeGenerator() {
       setError('Failed to generate QR code');
       console.error('Error generating QR code:', err);
     }
-  };
+  }, [color, bgColor]);
 
   const downloadQRCode = async () => {
     if (!qrCode) {
@@ -64,7 +65,7 @@ export default function QrCodeGenerator() {
       generateQRCode(url);
     }, 500);
     return () => clearTimeout(debounce);
-  }, [url, color, bgColor]);
+  }, [url, color, bgColor, generateQRCode]);
 
   return (
     <div className="max-w-4xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-card shadow-sm">
@@ -151,13 +152,14 @@ export default function QrCodeGenerator() {
         <Card className="overflow-hidden animate-slide-up animation-delay-300">
           <CardContent className="p-6 flex flex-col items-center gap-4">
             <div className="relative">
-              <img 
+              <Image 
                 src={qrCode} 
                 alt="QR Code"
-                className="rounded-lg shadow-sm transition-all duration-300 hover:shadow-md"
                 width={200}
                 height={200}
+                className="rounded-lg shadow-sm transition-all duration-300 hover:shadow-md"
                 style={{ backgroundColor: bgColor }}
+                unoptimized
               />
             </div>
             <div className="text-sm text-muted-foreground text-center">

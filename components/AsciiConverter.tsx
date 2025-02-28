@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Upload, Download, Image as ImageIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Upload, Download } from "lucide-react";
+import Image from 'next/image';
 
 const ASCII_CHARS = {
   'Standard': '@%#*+=-:. ',
@@ -23,7 +23,7 @@ export default function AsciiConverter() {
   const [fontSize, setFontSize] = useState<number>(10);
   const [charSet, setCharSet] = useState<keyof typeof ASCII_CHARS>('Standard');
   const [width, setWidth] = useState<number>(100);
-  const [color, setColor] = useState<string>('#000000');
+  const [color] = useState<string>('#000000');
   const [preserveColor, setPreserveColor] = useState<boolean>(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -42,55 +42,55 @@ export default function AsciiConverter() {
     return (r + g + b) / 3;
   };
 
-  const convertToAscii = () => {
-    if (!image || !canvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const img = new Image();
-    img.onload = () => {
-      // Calculate height while maintaining aspect ratio
-      const aspectRatio = img.height / img.width;
-      const height = Math.floor(width * aspectRatio);
-
-      canvas.width = width;
-      canvas.height = height;
-
-      ctx.drawImage(img, 0, 0, width, height);
-      const imageData = ctx.getImageData(0, 0, width, height);
-      const pixels = imageData.data;
-
-      let asciiArt = '';
-      const chars = ASCII_CHARS[charSet];
-
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          const idx = (y * width + x) * 4;
-          const brightness = getPixelBrightness(
-            pixels[idx],
-            pixels[idx + 1],
-            pixels[idx + 2]
-          );
-          
-          const charIndex = Math.floor((brightness / 255) * (chars.length - 1));
-          
-          if (preserveColor) {
-            asciiArt += `<span style="color: rgb(${pixels[idx]}, ${pixels[idx + 1]}, ${pixels[idx + 2]})">${chars[charIndex]}</span>`;
-          } else {
-            asciiArt += chars[charIndex];
-          }
-        }
-        asciiArt += '\n';
-      }
-
-      setAscii(asciiArt);
-    };
-    img.src = image;
-  };
-
   useEffect(() => {
+    const convertToAscii = () => {
+      if (!image || !canvasRef.current) return;
+
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const img: HTMLImageElement = new window.Image();
+      img.onload = () => {
+        // Calculate height while maintaining aspect ratio
+        const aspectRatio = img.height / img.width;
+        const height = Math.floor(width * aspectRatio);
+
+        canvas.width = width;
+        canvas.height = height;
+
+        ctx.drawImage(img, 0, 0, width, height);
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const pixels = imageData.data;
+
+        let asciiArt = '';
+        const chars = ASCII_CHARS[charSet];
+
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const idx = (y * width + x) * 4;
+            const brightness = getPixelBrightness(
+              pixels[idx],
+              pixels[idx + 1],
+              pixels[idx + 2]
+            );
+            
+            const charIndex = Math.floor((brightness / 255) * (chars.length - 1));
+            
+            if (preserveColor) {
+              asciiArt += `<span style="color: rgb(${pixels[idx]}, ${pixels[idx + 1]}, ${pixels[idx + 2]})">${chars[charIndex]}</span>`;
+            } else {
+              asciiArt += chars[charIndex];
+            }
+          }
+          asciiArt += '\n';
+        }
+
+        setAscii(asciiArt);
+      };
+      img.src = image;
+    };
+
     if (image) {
       convertToAscii();
     }
@@ -141,10 +141,12 @@ export default function AsciiConverter() {
 
             {image && (
               <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary/10">
-                <img
+                <Image
                   src={image}
                   alt="Preview"
-                  className="object-contain w-full h-full"
+                  fill
+                  className="object-contain"
+                  unoptimized
                 />
               </div>
             )}

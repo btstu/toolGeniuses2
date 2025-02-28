@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type UnitType = 'length' | 'weight' | 'temperature' | 'volume';
@@ -68,7 +68,7 @@ export default function UnitConverter() {
     setResult('');
   };
 
-  const convert = () => {
+  const convert = useCallback(() => {
     if (!fromUnit || !toUnit || !value) {
       setResult('');
       return;
@@ -106,11 +106,11 @@ export default function UnitConverter() {
       
       setResult(formattedResult);
     }
-  };
+  }, [value, fromUnit, toUnit, unitType]);
 
   useEffect(() => {
     convert();
-  }, [value, fromUnit, toUnit, unitType]);
+  }, [convert]);
 
   const formatUnitLabel = (unit: string) => {
     if (unitLabels[unit as keyof typeof unitLabels]) {
