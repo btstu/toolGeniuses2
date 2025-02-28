@@ -18,10 +18,11 @@ const tools = [
     icon: ImageIcon,
     gradient: "from-pink-500 to-violet-500",
     delay: "100",
+ 
   },
   {
     name: "RGB to HEX",
-    href: "/tools/rgb-hex",
+    href: "/tools/color",
     icon: Paintbrush,
     gradient: "from-green-400 to-cyan-500",
     delay: "200",
@@ -35,7 +36,7 @@ const tools = [
   },
   {
     name: "Unit Converter",
-    href: "/tools/unit",
+    href: "/tools/units",
     icon: Ruler,
     gradient: "from-fuchsia-400 to-violet-500",
     delay: "400",
@@ -59,20 +60,20 @@ const tools = [
     href: "/tools/ascii",
     icon: Binary,
     gradient: "from-indigo-400 to-cyan-400",
-    delay: "700",
+    delay: "800",
   },
   {
     name: "Crypto Tools",
     href: "/tools/crypto",
     icon: BarChart3,
     gradient: "from-rose-400 to-red-500",
-    delay: "800",
+    delay: "1000",
   },
 ];
 
 export default function Home() {
   return (
-    <main className="flex-1 min-h-screen lg:ml-64 p-8">
+    <main className="flex-1 min-h-screen px-8 pb-4 pt-16">
       <div className="max-w-6xl mx-auto">
         <div className="space-y-8">
           <div className="space-y-4">
@@ -108,7 +109,7 @@ export default function Home() {
                   <tool.icon className="w-8 h-8 mb-3 transition-transform group-hover:scale-110" />
                   <h2 className="text-xl font-semibold mb-2">{tool.name}</h2>
                   <div className="flex items-center text-muted-foreground">
-                    <span className="text-sm">Try it now →</span>
+                    <span className="text-sm text-muted-foreground group-hover:text-white transition-colors">Try it now →</span>
                   </div>
                 </div>
               </Link>

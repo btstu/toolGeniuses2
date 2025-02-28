@@ -92,7 +92,7 @@ function SidebarContent() {
   
   return (
     <div className="flex flex-col gap-2 p-4 bg-background">
-      <h1 className="text-xl font-semibold mb-4 text-foreground">🛠️ ToolsGeniuses 2.0</h1>
+      <Link href="/" className="text-xl font-semibold mb-4 text-foreground">🛠️ ToolsGeniuses 2.0</Link>
       {tools.map((tool) => (
         <Link
           key={tool.href}
