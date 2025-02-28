@@ -25,6 +25,15 @@ type PriceHistory = {
   price: number;
 }[];
 
+type HistoryPoint = {
+  time: number;
+  priceUsd: string;
+};
+
+type ApiResponse = {
+  data: HistoryPoint[];
+};
+
 export default function CryptoTools() {
   const [cryptoData, setCryptoData] = useState<CryptoData[]>([]);
   const [selectedCrypto, setSelectedCrypto] = useState<string>('bitcoin');
@@ -60,8 +69,8 @@ export default function CryptoTools() {
       const response = await fetch(
         `https://api.coincap.io/v2/assets/${id}/history?interval=h1&start=${start}&end=${now}`
       );
-      const data = await response.json();
-      setPriceHistory(data.data.map((point: any) => ({
+      const data = await response.json() as ApiResponse;
+      setPriceHistory(data.data.map((point: HistoryPoint) => ({
         timestamp: point.time,
         price: parseFloat(point.priceUsd),
       })));
@@ -87,7 +96,7 @@ export default function CryptoTools() {
           continue;
         }
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         
         if (!data || !data.data || !Array.isArray(data.data)) {
           console.warn(`Skipping ${id}: Invalid data format`);
@@ -99,7 +108,7 @@ export default function CryptoTools() {
           continue;
         }
 
-        histories[id] = data.data.map((point: any) => ({
+        histories[id] = data.data.map((point: HistoryPoint) => ({
           timestamp: point.time,
           price: parseFloat(point.priceUsd),
         }));

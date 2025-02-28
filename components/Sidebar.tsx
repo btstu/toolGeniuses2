@@ -75,6 +75,7 @@ const tools = [
 ];
 
 export function Sidebar() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
