@@ -9,6 +9,7 @@ import {
   Binary,
   BarChart3,
   Ruler,
+  FileText,
 } from "lucide-react";
 
 const tools = [
@@ -68,6 +69,13 @@ const tools = [
     icon: BarChart3,
     gradient: "from-rose-400 to-red-500",
     delay: "1000",
+  },
+  {
+    name: "Image to Text",
+    href: "/tools/ocr",
+    icon: FileText,
+    gradient: "from-emerald-400 to-teal-500",
+    delay: "900",
   },
 ];
 

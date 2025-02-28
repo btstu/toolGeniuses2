@@ -6,6 +6,7 @@ import { Menu, Paintbrush, Ruler, Clock, DollarSign, QrCode, FileText, Mic, Pale
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 const tools = [
   {
@@ -63,12 +64,22 @@ const tools = [
     href: "/tools/image-css",
     color: "bg-gradient-to-r from-fuchsia-400 to-violet-500",
     emoji: ""
+  },
+  {
+    name: "Image to Text",
+    icon: <FileText className="w-5 h-5" />,
+    href: "/tools/ocr",
+    color: "bg-gradient-to-r from-emerald-400 to-teal-500",
+    emoji: ""
   }
 ];
 
 export function Sidebar() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="outline" size="icon" className="fixed left-4 top-4 lg:hidden">
           <Menu className="h-5 w-5" />
@@ -76,18 +87,18 @@ export function Sidebar() {
       </SheetTrigger>
       <SheetContent side="left" className="w-64 p-0 bg-background border-r">
         <SheetTitle className="sr-only">Menu</SheetTitle>
-        <SidebarContent />
+        <SidebarContent setOpen={setOpen} />
       </SheetContent>
 
       {/* Desktop Sidebar */}
       <aside className="hidden lg:flex h-screen w-64 flex-col fixed left-0 top-0 border-r bg-background">
-        <SidebarContent />
+        <SidebarContent setOpen={setOpen} />
       </aside>
     </Sheet>
   );
 }
 
-function SidebarContent() {
+function SidebarContent({ setOpen }: { setOpen: (open: boolean) => void }) {
   const pathname = usePathname();
   
   return (
@@ -97,6 +108,7 @@ function SidebarContent() {
         <Link
           key={tool.href}
           href={tool.href}
+          onClick={() => setOpen(false)}
           className={cn(
             "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
             pathname === tool.href 

@@ -188,7 +188,7 @@ export default function ImageToCss() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="space-y-4">
-          <Card className="bg-card text-card-foreground">
+          <Card className="bg-card text-card-foreground overflow-hidden">
             <CardHeader>
               <CardTitle className="text-sm font-medium">Upload Image</CardTitle>
             </CardHeader>
@@ -261,7 +261,7 @@ export default function ImageToCss() {
           </Card>
 
           {generatedCode && (
-            <Card className="bg-card text-card-foreground">
+            <Card className="bg-card text-card-foreground overflow-hidden">
               <CardHeader>
                 <CardTitle className="text-sm font-medium">Generated Code</CardTitle>
               </CardHeader>
@@ -311,7 +311,7 @@ export default function ImageToCss() {
           )}
         </div>
 
-        <Card className="lg:row-span-2 bg-card text-card-foreground">
+        <Card className="lg:row-span-2 bg-card text-card-foreground overflow-hidden">
           <CardHeader>
             <CardTitle className="text-sm font-medium">Live Preview</CardTitle>
           </CardHeader>
