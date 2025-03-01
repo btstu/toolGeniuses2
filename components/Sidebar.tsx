@@ -103,26 +103,31 @@ function SidebarContent({ setOpen }: { setOpen: (open: boolean) => void }) {
   const pathname = usePathname();
   
   return (
-    <div className="flex flex-col gap-2 p-4 bg-background">
-      <Link href="/" className="text-xl font-semibold mb-4 text-foreground">🛠️ ToolsGeniuses 2.0</Link>
-      {tools.map((tool) => (
-        <Link
-          key={tool.href}
-          href={tool.href}
-          onClick={() => setOpen(false)}
-          className={cn(
-            "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-            pathname === tool.href 
-              ? "bg-secondary text-secondary-foreground" 
-              : "hover:bg-secondary/50"
-          )}
-        >
-          <div className={`p-2 rounded-md ${tool.color} text-white`}>
-            {tool.icon}
-          </div>
-          <span>{tool.emoji} {tool.name}</span>
-        </Link>
-      ))}
+    <div className="flex flex-col h-full bg-background">
+      <div className="flex-1 p-4 space-y-2">
+        <Link href="/" className="text-xl font-semibold mb-4 text-foreground">🛠️ ToolsGeniuses 2.0</Link>
+        {tools.map((tool) => (
+          <Link
+            key={tool.href}
+            href={tool.href}
+            onClick={() => setOpen(false)}
+            className={cn(
+              "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
+              pathname === tool.href 
+                ? "bg-secondary text-secondary-foreground" 
+                : "hover:bg-secondary/50"
+            )}
+          >
+            <div className={`p-2 rounded-md ${tool.color} text-white`}>
+              {tool.icon}
+            </div>
+            <span>{tool.emoji} {tool.name}</span>
+          </Link>
+        ))}
+      </div>
+      <div className="p-4 text-xs text-muted-foreground">
+        © All rights reserved 2025
+      </div>
     </div>
   );
 } 
