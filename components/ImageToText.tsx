@@ -96,7 +96,7 @@ export default function ImageToText() {
     <div className="max-w-7xl mx-auto flex flex-col gap-4 p-6 border rounded-lg bg-card shadow-sm">
       <h2 className="text-lg font-bold flex items-center gap-2">
         <FileText className="w-5 h-5" />
-        <span>Image to Text</span>
+        <span>Image to Text - Extract text from image</span>
       </h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
